@@ -15,7 +15,6 @@ boolean flag=false;
 SessionFactory  sessionFactory =  config.buildSessionFactory();
 Session session=sessionFactory.openSession();
 Recipes recipe=new Recipes();
-recipe.setId(4);
 recipe.setRecipeName("Pea Pulao");
 recipe.setRecipeSource("meenus cusines");
 Transaction transaction=null;
