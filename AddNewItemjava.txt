@@ -1,0 +1,45 @@
+package com.meenus.practice;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class AddNewItem {
+	public static void main(String[] args) {
+boolean flag=false;
+ Configuration config=new Configuration();
+ config.addAnnotatedClass(Recipes.class);
+ config.configure();
+SessionFactory  sessionFactory =  config.buildSessionFactory();
+Session session=sessionFactory.openSession();
+Recipes recipe=new Recipes();
+recipe.setId(4);
+recipe.setRecipeName("Pea Pulao");
+recipe.setRecipeSource("meenus cusines");
+Transaction transaction=null;
+try {	 transaction=session.beginTransaction();
+	session.persist(recipe);
+	flag=true;
+}catch(HibernateException e) {
+	e.printStackTrace();
+
+}catch (Exception e) {
+	e.printStackTrace();
+}
+finally {
+	if(flag== true) {
+		transaction.commit();
+	}
+	else
+	{
+		transaction.rollback();
+	}
+	session.close();
+	sessionFactory.close();
+		
+	}
+}
+
+}
