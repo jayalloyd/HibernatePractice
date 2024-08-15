@@ -1,0 +1,49 @@
+package com.meenus.practice;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+public class UpdatingAnItem {
+
+
+
+	public static void main(String[] args) {
+boolean flag=false;
+ Configuration config=new Configuration();
+ config.addAnnotatedClass(Recipes.class);
+ config.configure();
+SessionFactory  sessionFactory =  config.buildSessionFactory();
+Session session=sessionFactory.openSession();
+Recipes recipe=new Recipes();
+recipe.setId(1);
+recipe.setRecipeName("biriyani");
+recipe.setRecipeSource("rooneys...cuisines");
+Transaction transaction=null;
+try {	 transaction=session.beginTransaction();
+	session.merge(recipe);// to update use merge and in hibernate.cfg.xml  use //update in   <property name="hibernate.hbm2ddl.auto">update</property>
+
+	flag=true;
+}catch(HibernateException e) {
+	e.printStackTrace();
+
+}catch (Exception e) {
+	e.printStackTrace();
+}
+finally {
+	if(flag== true) {
+		transaction.commit();
+	}
+	else
+	{
+		transaction.rollback();
+	}
+	session.close();
+	sessionFactory.close();
+		
+	}
+}
+
+}
