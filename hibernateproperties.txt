@@ -1,0 +1,13 @@
+in src/main/resources->hibernate.properties
+
+hibernate.connection.driver_class=com.mysql.cj.jdbc.Driver
+hibernate.connection.password=password
+hibernate.connection.url=jdbc:mysql://localhost:3306/hibernate_first
+hibernate.connection.username=root
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.use_sql_comments=true
+hibernate.hbm2ddl.auto=update
+
+in application launch main class no need of config.configure();
+while using this 
